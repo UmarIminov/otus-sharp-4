@@ -13,7 +13,10 @@ namespace Otus.Serializer
 
     public class MyConverter : JsonConverter<int>
     {
-        public override int Read(ref Utf8JsonReader reader, System.Type typeToConvert, JsonSerializerOptions options)
+        public override int Read(
+            ref Utf8JsonReader reader,
+             System.Type typeToConvert,
+              JsonSerializerOptions options)
         {
             var s = reader.GetString();
 
