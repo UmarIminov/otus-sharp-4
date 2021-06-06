@@ -19,7 +19,8 @@ namespace Otus.Serializer
 
         // Не сериализуется
 
-        public int B { get; }
+        [NonSerialized]
+        public int? B;
 
 
         public override string ToString()
@@ -29,7 +30,6 @@ namespace Otus.Serializer
     }
 
 
-    [Serializable]
     public class Bar : Foo
     {
         public Bar(int a, int b) : base(a, b)

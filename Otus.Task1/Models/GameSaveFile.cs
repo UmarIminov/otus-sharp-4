@@ -3,6 +3,13 @@ using System;
 namespace Otus.Task1.Models
 {
 
+
+    public enum Gender{
+        None = 0,
+        Male=1,
+        Female=2,
+    }
+
     /// <summary>
     /// Предмет
     /// </summary>
@@ -37,6 +44,13 @@ namespace Otus.Task1.Models
         /// </summary>
         /// <value></value>
         public string Name { get; set; }
+
+
+        /// <summary>
+        /// Пол персонажа
+        /// </summary>
+        /// <value></value>
+        public Gender Gender{get;set;}
     }
 
 

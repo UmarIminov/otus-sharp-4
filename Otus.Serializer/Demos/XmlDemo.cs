@@ -1,11 +1,20 @@
+using System;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace Otus.Serializer
 {
+
+    public enum ShopType
+    {
+        Private = 1,
+        Public = 2
+    }
     [XmlRoot("ShopShop")]
     public class AutoShop
     {
+        public ShopType ShopType { get; set; }
+
         [XmlArray("MyBeautifulCars")]
         public Car[] Cars { get; set; }
     }
@@ -17,7 +26,7 @@ namespace Otus.Serializer
         [XmlAttribute("BarColor")]
         public string Color { get; set; }
 
-        [XmlElement("NewName")]
+        [XmlElement("New Name")]
         public string Name { get; set; }
 
         [XmlIgnore]
@@ -28,8 +37,11 @@ namespace Otus.Serializer
     {
         public void Show()
         {
-            var car = new Car { Name = "LADA", Color = "Red", Price=222 };
-            var shop = new AutoShop { Cars = new[] { car } };
+            var car = new Car { Name = "LADA", Color = "Red", Price = 222 };
+            var car1 = new Car { Name = "Ниссан", Color = "Blue", Price = 222 };
+            var shop = new AutoShop { Cars = new[] { car, car1 }, ShopType = ShopType.Public };
+
+
             var s = new XmlSerializer(typeof(AutoShop));
 
 
@@ -37,7 +49,6 @@ namespace Otus.Serializer
             {
                 s.Serialize(fs, shop);
             }
-
         }
     }
 }

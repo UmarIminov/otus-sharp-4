@@ -10,23 +10,40 @@ using System.Text.Unicode;
 namespace Otus.Serializer
 {
 
-enum Status{
-    Hellp=1,
 
-    Model2=2
-}
-    class Library: ISerializable
+    public class MyConverter : JsonConverter<int>
     {
-        public Status Status{get;set;}
+        public override int Read(ref Utf8JsonReader reader, System.Type typeToConvert, JsonSerializerOptions options)
+        {
+            var s = reader.GetString();
+
+            return int.Parse(s.Replace("fancy_number_", ""));
+
+        }
+
+        public override void Write(
+            Utf8JsonWriter writer,
+             int value,
+              JsonSerializerOptions options)
+        {
+            writer.WriteStringValue($"fancy_number_{value}");                                                                                                    //JsonStringEnumConverter 
+        }
+    }
+
+    enum Status
+    {
+        Hellp = 1,
+
+        Model2 = 2
+    }
+    class Library
+    {
+        public Status Status { get; set; }
         public string Name { get; set; }
 
         [JsonPropertyName("book_collection")]
         public IEnumerable<Book> Books { get; set; }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Hey", Status);
-        }
     }
 
 
@@ -41,6 +58,8 @@ enum Status{
         public string Name { get; set; }
 
         public string ShouldInclude;
+
+
         public IEnumerable<Page> Pages { get; set; }
     }
 
@@ -50,6 +69,9 @@ enum Status{
         {
             Number = num;
         }
+        
+
+        [JsonConverter(typeof(MyConverter))]
         public int Number { get; set; }
     }
 
@@ -66,16 +88,18 @@ enum Status{
                 WriteIndented = true,
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                IncludeFields = true,
+
             };
 
 
             var library = new Library
             {
-                Status=Status.Hellp,
+                Status = Status.Hellp,
                 Name = "им. Ленина",
                 Books = books
             };
-            var s = JsonSerializer.Serialize(library);
+            var s = JsonSerializer.Serialize(library, opt);
             File.WriteAllText("demoDataFiles\\file.json", s);
         }
     }

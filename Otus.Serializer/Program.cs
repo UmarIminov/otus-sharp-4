@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -12,10 +13,13 @@ namespace Otus.Serializer
     class Program
     {
 
+
+
+
         static void Main(string[] args)
         {
-            var attrDemo = new JsonDemo();
-            attrDemo.Show();
+            var demo = new XmlDemo();
+            demo.Show();
         }
     }
 }

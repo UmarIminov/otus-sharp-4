@@ -12,16 +12,13 @@ namespace Otus.Serializer.Demos
     [ProtoContract]
     public class TestMe
     {
-
-
         public TestMe()
         {
             Doubles = new List<double>();
         }
+
         [ProtoMember(1)]
         public List<double> Doubles { get; set; }
-
-
     }
 
     public class ProtoDemo

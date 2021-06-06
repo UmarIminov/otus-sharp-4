@@ -17,6 +17,20 @@ namespace Otus.Task1
             return res;
         }
 
+        static void SerializeBinary(SaveFile sf){
+
+        }
+
+        
+        static void SerializeJson(SaveFile sf){
+
+        }
+
+
+        static void SerializeXml(SaveFile sf){
+
+        }
+
         static SaveFile Generate2()
         {
             var res = new SaveFile();
@@ -32,6 +46,15 @@ namespace Otus.Task1
         {
             var g1 = Generate1();
             var g2 = Generate2();
+
+            SerializeBinary(g1);
+            SerializeJson(g1);
+            SerializeXml(g1);
+
+            
+            SerializeBinary(g2);
+            SerializeJson(g2);
+            SerializeXml(g2);
         }
     }
 }

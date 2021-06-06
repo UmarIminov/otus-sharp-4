@@ -9,7 +9,7 @@ namespace Otus.Serializer
     /// <summary>
     /// 
     /// </summary>
-   // [Serializable]
+    [Serializable]
     public class TestFile 
     {
 
@@ -17,6 +17,7 @@ namespace Otus.Serializer
         {
             Doubles = new List<double>();
         }
+        
         public List<double> Doubles { get; set; }
 
 

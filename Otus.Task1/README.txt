@@ -1,7 +1,12 @@
-1. XML, JSON, Binary, Proto
-2. сериализовать
-3. Пользователь сохраняется как "u"
-4. XML: User.level как атрибут
-5. Items.Quantity - если меньше 0 - Exception
-6. Coords - не сериализовать
-7. Кириллица - сериализовать
+1. XML, JSON, Binary - сериализовать
+2. XML, JSON Пользователь сохраняется как "u"
+3. XML: User.level как атрибут
+4. Coords - не сериализовать
+
+Кто успел 1-4,
+5. JSON: Кириллица - сериализовать
+6. JSON, XML: сериализовать Gender как m/f
+
+Со звездочкой
+7. Items.Quantity - если меньше 0 - Exception
+

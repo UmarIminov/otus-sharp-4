@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Otus.Serializer
 {
 
-    [Serializable]
+    
     public class GameSave : ISerializable
     {
         public GameSave()
@@ -15,11 +15,12 @@ namespace Otus.Serializer
 
         public int A { get; set; }
 
-        public DateTime SaveTimestamp { get; set; }
+        public DateTime? SaveTimestamp { get; set; }
 
         // Из ISerializable, вызывается при сериализации
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            Console.WriteLine("Serializing");
          info.AddValue("saveTimestamp", DateTime.Now);
             // ...
         }
@@ -27,7 +28,13 @@ namespace Otus.Serializer
         // Особый конструктор - при десериализации
         public GameSave(SerializationInfo info, StreamingContext context)
         {
+            Console.WriteLine("Deserializing");
             SaveTimestamp=info.GetDateTime("saveTimestamp");
+        }
+
+        public override string ToString()
+        {
+           return $"SaveTimestamp: {SaveTimestamp}";
         }
     }
 
@@ -35,12 +42,24 @@ namespace Otus.Serializer
     {
         public void Show()
         {
-            var obj=new GameSave();
+             var bf = new BinaryFormatter();
 
-            var bf = new BinaryFormatter();
+            var before = new GameSave();
 
-            var fs = new FileStream("demoDataFiles\\file.bin", FileMode.Create);
-            bf.Serialize(fs, obj);
+            Console.WriteLine($"before: {before}");
+
+            using (var fs = new FileStream("demoDataFiles\\serDemo.bin", FileMode.Create))
+            {
+                bf.Serialize(fs, before);
+            }
+Console.Write("Ждем: " );
+            Console.ReadLine();
+            using (var fs = new FileStream("demoDataFiles\\serDemo.bin", FileMode.Open))
+            {
+                var after = (GameSave)bf.Deserialize(fs);
+
+                Console.WriteLine($"after: {after}");
+            }
         }
     }
 }
