@@ -10,3 +10,4 @@
 Со звездочкой
 7. Items.Quantity - если меньше 0 - Exception
 
+test
